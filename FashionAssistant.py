@@ -18,11 +18,11 @@ translations = {
         "occasion_label": "Occasion (e.g., Wedding, Party, Casual, etc.)",
         "weather_label": "Weather (e.g., Winter, Summer, Wet, Dry, etc.)",
         "gender_label": "Gender",
-        "headwear_label": "Headwears",
-        "top_label": "Tops",
-        "bottom_label": "Bottoms",
-        "shoes_label": "Shoes",
-        "accessories_label": "Accessories",
+        "headwear_label": "Headwears (e.g., hat, brown fedora, NY Yankee cap, etc.)",
+        "top_label": "Tops (e.g., t-shirt, pink polo, tank top, etc.)",
+        "bottom_label": "Bottoms (e.g., baggy jeans, shorts, etc.)",
+        "shoes_label": "Shoes (e.g., sneakers, high heels, red flipflops, etc.)",
+        "accessories_label": "Accessories (e.g. gold necklace, casio watch, bracelet, etc.)",
         "generate_outfit": "Organize an Outfit",
         "ask_button": "✋ Ask",
         "english_button": "English",
@@ -39,11 +39,11 @@ translations = {
         "occasion_label": "Occasion (par exemple, Mariage, Fête, Décontracté, etc.)",
         "weather_label": "Temps (par exemple, Hiver, Été, Humide, Sec, etc.)",
         "gender_label": "Genre",
-        "headwear_label": "Chapeaux",
-        "top_label": "Hauts",
-        "bottom_label": "Bas",
-        "shoes_label": "Chaussures",
-        "accessories_label": "Accessoires",
+        "headwear_label": "Couvre-chefs (par exemple, chapeau, fedora marron, casquette des Yankees de New York, etc.)",
+        "top_label": "Hauts (par exemple, t-shirt, polo rose, débardeur, etc.)",
+        "bottom_label": "BBas (par exemple, jeans amples, shorts, etc.)",
+        "shoes_label": "Chaussures (par exemple, baskets, talons hauts, tongs rouges, etc.)",
+        "accessories_label": "Accessoires (par exemple, collier en or, montre Casio, bracelet, etc.)",
         "generate_outfit": "Organiser une tenue",
         "ask_button": "✋ Demander",
         "english_button": "Anglais",
@@ -155,7 +155,7 @@ def organize_a_fit(headwear, top, bottom, shoes, accessories, occasion, weather,
     messages = [
     {
         "role": "system",
-             "content": f"Given the following available clothing items, organize multiple stylish outfit combinations for a {gender} attending a {occasion} in {weather} weather. \n\n{clothing_details}\n\nFeel free to mix and match, suggest creative styling options, and fill in missing pieces where necessary."
+             "content": f"Given the following available clothing items, organize multiple stylish outfit combinations for a {gender} attending a {occasion} in {weather} weather. \n\n{clothing_details}\n\n. Do not add any unnecessary suggestions or styling, and only suggest a style strictly based on what was the given inputs."
     }
     ]
     
@@ -324,7 +324,7 @@ with gr.Blocks(
             top_label = gr.Markdown(translations[current_language]["top_label"])
             top_input = gr.Textbox(show_label = False)
 
-            bottom_label = gr.Markdown(translations[current_language]["bottom_label"])
+            bottom_label = gr.Markdown(translations[current_language]["bottom_label"])  
             bottom_input = gr.Textbox(show_label = False)
 
             shoes_label = gr.Markdown(translations[current_language]["shoes_label"])
@@ -341,61 +341,61 @@ with gr.Blocks(
                 outputs=fashion_output
             )
             
-        with gr.TabItem("Language|Langue", elem_classes="language_tab"): 
-            with gr.Row(): 
-                english_button = gr.Button(translations[current_language]["english_button"], elem_classes="EN_language")
-                french_button = gr.Button(translations[current_language]["french_button"], elem_classes="FR_language")
-                
-                language_label = gr.Markdown(translations[current_language]["selected_language"])
-                
-                english_button.click(
-                    fn=lambda: update_language("English"),
-                    inputs=None,
-                    outputs=[
-                        title,              
-                        send_button,            
-                        occasion_label,          
-                        weather_label,            
-                        gender_label,          
-                        headwear_label,            
-                        top_label,                
-                        bottom_label,             
-                        shoes_label,             
-                        accessories_label,            
-                        generate_btn,   
-                        english_button,  
-                        french_button, 
-                        user_input,   
-                        fit_markdown, 
-                        fashion_label,  
-                        language_label
-                    ]
-                )
-                
-                french_button.click(
-                    fn=lambda: update_language("French"),
-                    inputs=None,
-                    outputs=[
-                        title,
-                        send_button,
-                        occasion_label,          
-                        weather_label,            
-                        gender_label,          
-                        headwear_label,            
-                        top_label,                
-                        bottom_label,             
-                        shoes_label,             
-                        accessories_label,     
-                        generate_btn,
-                        english_button,
-                        french_button,
-                        user_input,
-                        fit_markdown,
-                        fashion_label,
-                        language_label
+      
+        with gr.Row(): 
+            english_button = gr.Button(translations[current_language]["english_button"], elem_classes="EN_language")
+            french_button = gr.Button(translations[current_language]["french_button"], elem_classes="FR_language")
+            
+            language_label = gr.Markdown(translations[current_language]["selected_language"])
+            
+            english_button.click(
+                fn=lambda: update_language("English"),
+                inputs=None,
+                outputs=[
+                    title,              
+                    send_button,            
+                    occasion_label,          
+                    weather_label,            
+                    gender_label,          
+                    headwear_label,            
+                    top_label,                
+                    bottom_label,             
+                    shoes_label,             
+                    accessories_label,            
+                    generate_btn,   
+                    english_button,  
+                    french_button, 
+                    user_input,   
+                    fit_markdown, 
+                    fashion_label,  
+                    language_label
+                ]
+            )
+            
+            french_button.click(
+                fn=lambda: update_language("French"),
+                inputs=None,
+                outputs=[
+                    title,
+                    send_button,
+                    occasion_label,          
+                    weather_label,            
+                    gender_label,          
+                    headwear_label,            
+                    top_label,                
+                    bottom_label,             
+                    shoes_label,             
+                    accessories_label,     
+                    generate_btn,
+                    english_button,
+                    french_button,
+                    user_input,
+                    fit_markdown,
+                    fashion_label,
+                    language_label
 
-                    ]
-                )
+                ]
+            )
 
             
                     
